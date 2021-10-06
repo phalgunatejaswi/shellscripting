@@ -10,7 +10,7 @@
 #So, the read command is not useful automation
 
 #Inputs before execution of script
-#Inputs can be given using specials 0, n, *, @, #
+#Inputs can be given using special variables 0, n, *, @, #
  echo $0 # to get the file name of the script
  echo $1 # to get the first argument passed when we run the script
  # $n is the nth argument passed while we run the script.
