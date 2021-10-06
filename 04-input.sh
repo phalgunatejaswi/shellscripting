@@ -15,7 +15,6 @@
  echo $1 # to get the first argument passed when we run the script
  # $n is the nth argument passed while we run the script.
  # Example: bash 04-input.sh 123 xyz abc  ---> $1 is 123, $3 is abc
- echo $* # to get all the arguments passed when we run the script
- echo $@ # to get all the arguments passed when we run the script
- echo $# # to get the number arguments passed when we run the script
-
+ echo "$*" # to get all the arguments passed when we run the script
+ echo "$@" # to get all the arguments passed when we run the script
+ echo "$#" # to get the number arguments passed when we run the script
