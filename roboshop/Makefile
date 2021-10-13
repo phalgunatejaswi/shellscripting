@@ -20,4 +20,5 @@ shipping: ## Installing Shipping Component
 	@bash shipping.sh
 user: ## Installing User Component
 	@bash user.sh
-databases: mongodb mysql redis rabbitmq  ## Installs all Databases
+databases: ## Installs all Databases
+databases: mongodb mysql redis rabbitmq
