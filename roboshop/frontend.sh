@@ -26,5 +26,4 @@ else
   echo -e "\e[31m failed\e[0m"
 fi
 
-
 # curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
