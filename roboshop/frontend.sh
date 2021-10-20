@@ -18,7 +18,7 @@ else
   echo -e "\e[31m failed\e[0m"
 fi
 
-echo -n -e "starting nginx\t\t\t..."
+echo -n -e "starting nginx service\t\t..."
 systemctl start nginx &>>$LOG
 if [ $? -eq 0 ]; then
   echo -e "\e[32m done\e[0m"
