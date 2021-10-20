@@ -13,7 +13,7 @@ validate() {
 }
 
 echo -n -e "Installing nginx\t\t..."
-yum install nginx -y &>>$LOG
+yuum install nginx -y &>>$LOG
 validate $?
 
 echo -n -e "Enabling nginx service\t\t..."
