@@ -8,6 +8,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32m done\e[0m"
 else
   echo -e "\e[31m failed\e[0m"
+  exit 1
 fi
 
 echo -n -e "Enabling nginx service\t\t..."
@@ -16,6 +17,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32m done\e[0m"
 else
   echo -e "\e[31m failed\e[0m"
+  exit 1
 fi
 
 echo -n -e "starting nginx service\t\t..."
@@ -24,6 +26,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32m done\e[0m"
 else
   echo -e "\e[31m failed\e[0m"
+  exit 1
 fi
 
 # curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
