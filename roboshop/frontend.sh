@@ -2,16 +2,29 @@
 
 LOG=/tmp/roboshop.log
 rm -rf $LOG
-echo -e "Installing nginx"
+echo -n -e "Installing nginx\t\t..."
 yum install nginx -y &>>$LOG
-echo -e "Installed nginx\t\t... \e[33mdone\e[0m"
+if [ $? -eq 0 ]; then
+  echo -e "\e[32m done\e[0m"
+else
+  echo -e "\e[31m failed\e[0m"
+fi
 
-echo "Enabling nginx service"
+echo -n -e "Enabling nginx service\t\t..."
 systemctl enable nginx &>>$LOG
-echo -e "Enabled nginx service   ... \e[33mdone\e[0m"
+if [ $? -eq 0 ]; then
+  echo -e "\e[32m done\e[0m"
+else
+  echo -e "\e[31m failed\e[0m"
+fi
 
-echo "starting nginx"
+echo -n -e "starting nginx\t\t..."
 systemctl start nginx &>>$LOG
-echo -e "started nginx\t\t... \e[33mdone\e[0m"
+if [ $? -eq 0 ]; then
+  echo -e "\e[32m done\e[0m"
+else
+  echo -e "\e[31m failed\e[0m"
+fi
+
 
 # curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
