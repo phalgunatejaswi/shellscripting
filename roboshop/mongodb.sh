@@ -12,7 +12,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc" >/etc/yum.repos.d/mong
 VALIDATE $?
 
 PRINT "Install MongoDB\t"
-yum install -y mongodb-org &>>"$LOG"
+sudo yum install -y mongodb-org &>>"$LOG"
 VALIDATE $?
 
 PRINT "Updating MongoDB Listener Address"
