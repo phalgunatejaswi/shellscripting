@@ -2,11 +2,11 @@
 
 source common.sh
 
-PRINT "Install NodeJS\t"
+PRINT "Install NodeJS\t\t"
 yum install nodejs make gcc-c++ -y &>>"$LOG"
 VALIDATE $?
 
-PRINT "Add Application User"
+PRINT "Add Application User\t"
 id roboshop &>>"$LOG"
 if [ $? -ne 0 ]; then
   useradd roboshop &>>"$LOG"
@@ -25,7 +25,7 @@ PRINT "Install NodeJS Dependencies"
 cd /home/roboshop/catalogue &>>"$LOG" && npm install --unsafe-perm &>>"$LOG"
 VALIDATE $?
 
-PRINT "Fix Permissions to Application User"
+PRINT "Fix App User Permissions"
 chown roboshop:roboshop /home/roboshop -R
 VALIDATE $?
 
