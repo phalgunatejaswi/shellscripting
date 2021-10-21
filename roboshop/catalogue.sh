@@ -26,10 +26,13 @@ cd /home/roboshop/catalogue &>>"$LOG" && npm install --unsafe-perm &>>"$LOG"
 VALIDATE $?
 
 PRINT "Fix App User Permissions"
-chown roboshop:roboshop /home/roboshop -R
+chown roboshop:roboshop /home/roboshop -R &>>"$LOG"
 VALIDATE $?
 
-# mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-# systemctl daemon-reload
-# systemctl start catalogue
-# systemctl enable catalogue
+PRINT "Update SystemD file"
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>"$LOG" && mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>"$LOG"
+VALIDATE $?
+
+PRINT "Configure and Start Catalogue Service"
+systemctl daemon-reload &>>"$LOG" && systemctl start catalogue &>>"$LOG" && systemctl enable catalogue &>>"$LOG"
+VALIDATE $?
