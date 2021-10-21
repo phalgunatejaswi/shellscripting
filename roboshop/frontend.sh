@@ -18,8 +18,12 @@ PRINT "unzip Frontend Archive"
 unzip /tmp/frontend.zip &>>"$LOG" && mv frontend-main/* . &>>"$LOG" && mv static/* . &>>"$LOG" && rm -rf frontend-master static &>>"$LOG"
 VALIDATE $?
 
+PRINT "Copy RoboShop Config"
+mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>"$LOG"
+VALIDATE $?
+
 PRINT "Update RoboShop Config"
-mv localhost.conf /etc/nginx/default.d/roboshop.conf  &>>"$LOG"
+sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' /etc/nginx/default.d/roboshop.conf &>>"$LOG"
 VALIDATE $?
 
 PRINT "Enabling nginx service"
