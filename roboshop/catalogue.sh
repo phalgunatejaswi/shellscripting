@@ -29,10 +29,10 @@ PRINT "Fix App User Permissions"
 chown roboshop:roboshop /home/roboshop -R &>>"$LOG"
 VALIDATE $?
 
-PRINT "Update SystemD file"
+PRINT "Update SystemD file\t"
 sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>"$LOG" && mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>"$LOG"
 VALIDATE $?
 
-PRINT "Configure and Start Catalogue Service"
+PRINT "Start Catalogue Service"
 systemctl daemon-reload &>>"$LOG" && systemctl start catalogue &>>"$LOG" && systemctl enable catalogue &>>"$LOG"
 VALIDATE $?
