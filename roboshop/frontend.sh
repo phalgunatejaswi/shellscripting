@@ -2,16 +2,16 @@
 
 source common.sh
 
-print "Installing nginx"
+PRINT "Installing nginx"
 yum install nginx -y &>>"$LOG"
-validate $?
+VALIDATE $?
 
-print "Enabling nginx service"
+PRINT "Enabling nginx service"
 systemctl enable nginx &>>"$LOG"
-validate $?
+VALIDATE $?
 
-print "starting nginx service"
+PRINT "starting nginx service"
 systemctl start nginx &>>"$LOG"
-validate $?
+VALIDATE $?
 
 # curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
