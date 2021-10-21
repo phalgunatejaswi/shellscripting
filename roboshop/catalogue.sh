@@ -33,6 +33,6 @@ PRINT "Update SystemD file\t"
 sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>"$LOG" && mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>"$LOG"
 VALIDATE $?
 
-PRINT "Start Catalogue Service"
+PRINT "Start Catalogue Service\t"
 systemctl daemon-reload &>>"$LOG" && systemctl start catalogue &>>"$LOG" && systemctl enable catalogue &>>"$LOG"
 VALIDATE $?
