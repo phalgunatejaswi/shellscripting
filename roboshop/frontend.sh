@@ -14,7 +14,7 @@ PRINT "Remove Old Htdocs"
 cd /usr/share/nginx/html && rm -rf * &>>"$LOG"
 VALIDATE $?
 
-PRINT "Extract Frontend Archive"
+PRINT "unzip Frontend Archive"
 unzip /tmp/frontend.zip &>>"$LOG" && mv frontend-main/* . &>>"$LOG" && mv static/* . &>>"$LOG" && rm -rf frontend-master static &>>"$LOG"
 VALIDATE $?
 
