@@ -29,4 +29,3 @@ VALIDATE $?
 PRINT "starting nginx service"
 systemctl restart nginx &>>"$LOG"
 VALIDATE $?
-
