@@ -1,26 +1,16 @@
 #!/usr/bin/bash
 
-LOG=/tmp/roboshop.log
-rm -rf $LOG
+source common.sh
 
-validate() {
-  if [ "$1" -eq 0 ]; then
-    echo -e "\e[32m done\e[0m"
-  else
-    echo -e "\e[31m failed\e[0m"
-    exit 1
-  fi
-}
-
-echo -n -e "Installing nginx\t\t..."
+print "Installing nginx"
 yum install nginx -y &>>$LOG
 validate $?
 
-echo -n -e "Enabling nginx service\t\t..."
+print "Enabling nginx service"
 systemctl enable nginx &>>$LOG
 validate $?
 
-echo -n -e "starting nginx service\t\t..."
+print "starting nginx service"
 systemctl start nginx &>>$LOG
 validate $?
 
