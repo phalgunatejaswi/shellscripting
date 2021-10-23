@@ -20,6 +20,7 @@ VALIDATE $?
 
 PRINT "Reset MySQL root password"
 DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
+echo $DEFAULT_PASSWORD
 mysql -uroot -pRoboShop@123 -e exit &>>"$LOG"
 if [ $? -ne 0 ]; then
   echo "if job"
