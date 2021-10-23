@@ -22,13 +22,13 @@ PRINT "Reset MySQL root password"
 DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 echo $DEFAULT_PASSWORD
 mysql -uroot -pRoboShop@123 -e exit &>>"$LOG"
+echo $?
 if [ $? -ne 0 ]; then
   echo "if job"
   mysql -uroot -p${DEFAULT_PASSWORD} --connect-expired-password -e "SET PASSWORD = PASSWORD('Roboshop@123');"
   #echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roboshop@123';" | mysql --connect-expired-password -uroot -p${DEFAULT_PASSWORD} &>>"$LOG"
 fi
 VALIDATE $?
-
 #
 #You can check the new password working or not using the following command.
 #
