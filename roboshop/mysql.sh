@@ -28,6 +28,7 @@ if [ $? -ne 0 ]; then
   #echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roboshop@123';" | mysql --connect-expired-password -uroot -p${DEFAULT_PASSWORD} &>>"$LOG"
 fi
 VALIDATE $?
+
 #
 #You can check the new password working or not using the following command.
 #
