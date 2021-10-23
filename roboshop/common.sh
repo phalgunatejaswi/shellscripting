@@ -53,7 +53,7 @@ NODEJS() {
   VALIDATE $?
 
   PRINT "Update SystemD file\t"
-  sed -i -e "s/MONGO_DNSNAME/mongodb.roboshop.internal/" -e "s/MONGO_ENDPOINT/mongodb.roboshop.internal/" -e "s/REDIS_ENDPOINT/redis.roboshop.internal/" /home/roboshop/"${COMPONENT}"/systemd.service &>>"$LOG" && mv /home/roboshop/"${COMPONENT}"/systemd.service /etc/systemd/system/"${COMPONENT}".service &>>"$LOG"
+  sed -i -e "s/MONGO_DNSNAME/mongodb.roboshop.internal/" -e "s/MONGO_ENDPOINT/mongodb.roboshop.internal/" -e "s/REDIS_ENDPOINT/redis.roboshop.internal/" -e "s/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/" /home/roboshop/"${COMPONENT}"/systemd.service &>>"$LOG" && mv /home/roboshop/"${COMPONENT}"/systemd.service /etc/systemd/system/"${COMPONENT}".service &>>"$LOG"
   VALIDATE $?
 
   PRINT "Start ${COMPONENT} Service\t"
