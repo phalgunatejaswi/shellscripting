@@ -37,15 +37,15 @@ NODEJS() {
   VALIDATE $?
 
   PRINT "Download Application Code"
-  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>"$LOG"
+  curl -s -L -o /tmp/"${COMPONENT}".zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>"$LOG"
   VALIDATE $?
 
   PRINT "Extract Application Code"
-  cd /home/roboshop &>>"$LOG" && unzip -o /tmp/"${COMPONENT}".zip &>>"$LOG" && rm -rf ${COMPONENT} &>>"$LOG" && mv ${COMPONENT}-main ${COMPONENT} &>>"$LOG"
+  cd /home/roboshop &>>"$LOG" && unzip -o /tmp/"${COMPONENT}".zip &>>"$LOG" && rm -rf "${COMPONENT}" &>>"$LOG" && mv "${COMPONENT}"-main "${COMPONENT}" &>>"$LOG"
   VALIDATE $?
 
   PRINT "Install NodeJS Dependencies"
-  cd /home/roboshop/${COMPONENT} &>>"$LOG" && npm install --unsafe-perm &>>"$LOG"
+  cd /home/roboshop/"${COMPONENT}" &>>"$LOG" && npm install --unsafe-perm &>>"$LOG"
   VALIDATE $?
 
   PRINT "Fix App User Permissions"
@@ -53,10 +53,10 @@ NODEJS() {
   VALIDATE $?
 
   PRINT "Update SystemD file\t"
-  sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'/home/roboshop/${COMPONENT}/systemd.service &>>"$LOG" && mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>"$LOG"
+  sed -i -e "s/MONGO_DNSNAME/mongodb.roboshop.internal/" -e "s/MONGO_ENDPOINT/mongodb.roboshop.internal/" -e "s/REDIS_ENDPOINT/redis.roboshop.internal/" /home/roboshop/"${COMPONENT}"/systemd.service &>>"$LOG" && mv /home/roboshop/"${COMPONENT}"/systemd.service /etc/systemd/system/"${COMPONENT}".service &>>"$LOG"
   VALIDATE $?
 
   PRINT "Start ${COMPONENT} Service\t"
-  systemctl daemon-reload &>>"$LOG" && systemctl restart ${COMPONENT} &>>"$LOG" && systemctl enable ${COMPONENT} &>>"$LOG"
+  systemctl daemon-reload &>>"$LOG" && systemctl restart "${COMPONENT}" &>>"$LOG" && systemctl enable "${COMPONENT}" &>>"$LOG"
   VALIDATE $?
 }
