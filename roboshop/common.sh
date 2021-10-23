@@ -41,7 +41,7 @@ NODEJS() {
   VALIDATE $?
 
   PRINT "Extract Application Code"
-  cd /home/roboshop &>>"$LOG" && unzip /tmp/${COMPONENT}.zip &>>"$LOG" && rm -rf ${COMPONENT} &>>"$LOG" && mv ${COMPONENT}-main ${COMPONENT} &>>"$LOG"
+  cd /home/roboshop &>>"$LOG" && unzip -o /tmp/${COMPONENT}.zip &>>"$LOG" && rm -rf ${COMPONENT} &>>"$LOG" && mv ${COMPONENT}-main ${COMPONENT} &>>"$LOG"
   VALIDATE $?
 
   PRINT "Install NodeJS Dependencies"
