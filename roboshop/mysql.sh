@@ -20,7 +20,7 @@ VALIDATE $?
 
 PRINT "Reset MySQL root password"
 DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
-echo "show databases;" | mysql -uroot -pRoboShop@1 &>>"$LOG"
+mysql -uroot -pRoboShop@1 -e "show databases;" &>>"$LOG"
 if [ $? -ne 0 ]; then
   mysql -uroot -p${DEFAULT_PASSWORD} --connect-expired-password -e "SET PASSWORD = PASSWORD('Roboshop@1');"
   #echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roboshop@123';" | mysql --connect-expired-password -uroot -p${DEFAULT_PASSWORD} &>>"$LOG"
