@@ -19,6 +19,7 @@ systemctl enable mysqld &>>"$LOG" && systemctl start mysqld  &>>"$LOG"
 VALIDATE $?
 
 PRINT "Reset MySQL root password"
+echo "show Databases" | mysql -uroot -pRoboShop@123 &>>"$LOG"
 DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roboshop@123';" | mysql --connect-expired-password -uroot -p${DEFAULT_PASSWORD} &>>"$LOG"
 #Next, We need to change the default root password in order to start using the database service.
