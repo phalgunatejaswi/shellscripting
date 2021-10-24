@@ -51,7 +51,7 @@ FIX_PERMISSIONS() {
 
 SYSTEMD_SERVICE() {
   PRINT "Update SystemD file\t"
-  sed -i -e "s/MONGO_DNSNAME/mongodb.roboshop.internal/" -e "s/MONGO_ENDPOINT/mongodb.roboshop.internal/" -e "s/REDIS_ENDPOINT/redis.roboshop.internal/" -e "s/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/" -e "s/CARTENDPOINT/cart.roboshop.internal/" -e "s/DBHOST/mysql.roboshop.internal/" /home/roboshop/"${COMPONENT}"/systemd.service &>>"$LOG" && mv /home/roboshop/"${COMPONENT}"/systemd.service /etc/systemd/system/"${COMPONENT}".service &>>"$LOG"
+  sed -i -e "s/MONGO_DNSNAME/mongodb.roboshop.internal/" -e "s/MONGO_ENDPOINT/mongodb.roboshop.internal/" -e "s/REDIS_ENDPOINT/redis.roboshop.internal/" -e "s/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/" -e "s/CARTENDPOINT/cart.roboshop.internal/" -e "s/DBHOST/mysql.roboshop.internal/" -e "s/CARTHOST/cart.roboshop.internal/" -e "s/USERHOST/user.roboshop.internal/" -e "s/AMQPHOST/rabbitmq.roboshop.internal/" /home/roboshop/"${COMPONENT}"/systemd.service &>>"$LOG" && mv /home/roboshop/"${COMPONENT}"/systemd.service /etc/systemd/system/"${COMPONENT}".service &>>"$LOG"
   VALIDATE $?
 
   PRINT "Start ${COMPONENT} Service\t"
@@ -87,6 +87,27 @@ MAVEN() {
 
   PRINT "Clean Maven Package\t"
   cd /home/roboshop/"${COMPONENT}" &>>"$LOG" && mvn clean package &>>"$LOG" && mv target/shipping-1.0.jar shipping.jar &>>"$LOG"
+  VALIDATE $?
+
+  FIX_PERMISSIONS
+  SYSTEMD_SERVICE
+}
+PYTHON3() {
+  PRINT "Install Python3\t\t"
+  yum install python36 gcc python3-devel -y &>>"$LOG"
+  VALIDATE $?
+
+  ADD_APP_USER
+  DOWNLOAD_APP_CODE
+
+  PRINT "Install Python3 Dependencies"
+  cd /home/roboshop/"${COMPONENT}" && pip3 install -r requirements.txt &>>"$LOG"
+  VALIDATE $?
+
+  PRINT "Update "${COMPONENT}" user and group id in config file"
+  UID=$(id -u roboshop)
+  GID=$(id -g roboshop)
+  sed -i -e "/uid/ c ${UID}" -e "/gid/ c ${GID}" &>>"$LOG"
   VALIDATE $?
 
   FIX_PERMISSIONS
