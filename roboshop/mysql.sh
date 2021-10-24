@@ -2,7 +2,7 @@
 
 source common.sh
 
-PRINT "Setup MySQL Repo"
+PRINT "Setup MySQL Repo\t"
 echo '[mysql57-community]
 name=MySQL 5.7 Community Server
 baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
@@ -10,11 +10,11 @@ enabled=1
 gpgcheck=0' > /etc/yum.repos.d/mysql.repo
 VALIDATE $?
 
-PRINT "Install MySQL"
+PRINT "Install MySQL\t\t"
 yum install mysql-community-server -y &>>"$LOG"
 VALIDATE $?
 
-PRINT "Start MySQL service"
+PRINT "Start MySQL service\t"
 systemctl enable mysqld &>>"$LOG" && systemctl start mysqld  &>>"$LOG"
 VALIDATE $?
 
@@ -34,7 +34,7 @@ if [ $? -eq 0 ]; then
 fi
 VALIDATE $?
 
-PRINT "Download Shipping Service Schema"
+PRINT "Download Shipping Schema"
 curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>"$LOG"
 VALIDATE $?
 
