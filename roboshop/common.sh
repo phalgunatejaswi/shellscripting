@@ -57,7 +57,6 @@ SYSTEMD_SERVICE() {
   PRINT "Start ${COMPONENT} Service\t"
   systemctl daemon-reload &>>"$LOG" && systemctl restart "${COMPONENT}" &>>"$LOG" && systemctl enable "${COMPONENT}" &>>"$LOG"
   VALIDATE $?
-
 }
 
 NODEJS() {
