@@ -22,18 +22,15 @@ PRINT "Reset MySQL root password"
 DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 mysql -uroot -pRoboshop@123 -e exit &>>"$LOG"
 if [ $? -ne 0 ]; then
-  echo "if job"
   mysql -uroot -p${DEFAULT_PASSWORD} --connect-expired-password -e "SET PASSWORD = PASSWORD('Roboshop@123');"
   #echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roboshop@123';" | mysql --connect-expired-password -uroot -p${DEFAULT_PASSWORD} &>>"$LOG"
 fi
 VALIDATE $?
-#
-#You can check the new password working or not using the following command.
-#
-## mysql -u root -p
-#
-#Run the following SQL commands to remove the password policy.
-#> uninstall plugin validate_password;
+
+PRINT "Uninstall MySQL Password Policy"
+echo "uninstall plugin validate_password;" | mysql -uroot -pRoboshop@123 &>>"$LOG"
+VALIDATE $?
+
 #Setup Needed for Application.
 #As per the architecture diagram, MySQL is needed by
 #
