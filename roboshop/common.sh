@@ -79,7 +79,7 @@ NODEJS() {
 
 MAVEN() {
   PRINT "Install MAVEN\t\t"
-  um install maven -y &>>"$LOG"
+  yum install maven -y &>>"$LOG"
   VALIDATE $?
 
   ADD_APP_USER
