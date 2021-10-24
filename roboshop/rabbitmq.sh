@@ -13,7 +13,7 @@ PRINT "Setup RabbitMQ Repos"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>"$LOG"
 VALIDATE $?
 
-PRINT "Install RabbitMQ\t"
+PRINT "Install RabbitMQ"
 yum install rabbitmq-server -y &>>"$LOG"
 VALIDATE $?
 
@@ -24,8 +24,6 @@ VALIDATE $?
 PRINT "Create application user"
 rabbitmqctl list_users | grep roboshop &>>"$LOG"
 if [ $? -ne 0 ]; then
-  rabbitmqctl add_user roboshop roboshop123
-  rabbitmqctl set_user_tags roboshop administrator
-  rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+  rabbitmqctl add_user roboshop roboshop123  &>>"$LOG" && rabbitmqctl set_user_tags roboshop administrator  &>>"$LOG" && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"  &>>"$LOG"
 fi
 VALIDATE $?
