@@ -28,21 +28,16 @@ fi
 VALIDATE $?
 
 PRINT "Uninstall MySQL Password Policy"
-echo "uninstall plugin validate_password;" | mysql -uroot -pRoboshop@123 &>>"$LOG"
+mysql -uroot -pRoboshop@123 -e "SHOW PLUGINS" 2>>"$LOG" | grep -i validate_password &>>"$LOG"
+if [ $? -eq 0 ]; then
+  echo "uninstall plugin validate_password;" | mysql -uroot -pRoboshop@123 &>>"$LOG"
+fi
 VALIDATE $?
 
-#Setup Needed for Application.
-#As per the architecture diagram, MySQL is needed by
-#
-#Shipping Service
-#So we need to load that schema into the database, So those applications will detect them and run accordingly.
-#
-#To download schema, Use the following command
-#
-## curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
-#Load the schema for Services.
-#
-## cd /tmp
-## unzip mysql.zip
-## cd mysql-main
-## mysql -uroot -pRoboShop@1 <shipping.sql
+PRINT "Download Shipping Service Schema"
+curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>"$LOG"
+VALIDATE $?
+
+PRINT "Load Shipping Service Schema"
+cd /tmp/ && unzip mysql.zip &>>"$LOG" && cd mysql-main && mysql -uroot -pRoboShop@1 <shipping.sql &>>"$LOG"
+VALIDATE $?
