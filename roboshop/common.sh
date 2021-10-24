@@ -85,7 +85,7 @@ MAVEN() {
   ADD_APP_USER
   DOWNLOAD_APP_CODE
 
-  PRINT "Clean Maven Package"
+  PRINT "Clean Maven Package\t"
   cd /home/roboshop/"${COMPONENT}" &>>"$LOG" && mvn clean package &>>"$LOG" && mv target/shipping-1.0.jar shipping.jar &>>"$LOG"
   VALIDATE $?
 
