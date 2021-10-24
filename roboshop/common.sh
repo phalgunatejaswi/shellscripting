@@ -105,9 +105,9 @@ PYTHON3() {
   VALIDATE $?
 
   PRINT "Update "${COMPONENT}" user and group id in config file"
-  UID=$(id -u roboshop)
-  GID=$(id -g roboshop)
-  sed -i -e "/uid/ c ${UID}" -e "/gid/ c ${GID}" payment.ini &>>"$LOG"
+  UserID=$(id -u roboshop)
+  GroupID=$(id -g roboshop)
+  sed -i -e "/uid/ c ${UserID}" -e "/gid/ c ${GroupID}" payment.ini &>>"$LOG"
   VALIDATE $?
 
   FIX_PERMISSIONS
