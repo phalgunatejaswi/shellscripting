@@ -39,5 +39,5 @@ curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/a
 VALIDATE $?
 
 PRINT "Load Shipping Service Schema"
-cd /tmp/ && unzip mysql.zip &>>"$LOG" && cd mysql-main && mysql -uroot -pRoboshop@123 <shipping.sql &>>"$LOG"
+cd /tmp && unzip -o mysql.zip &>>"$LOG" && cd mysql-main && mysql -uroot -pRoboshop@123 <shipping.sql &>>"$LOG"
 VALIDATE $?
