@@ -104,10 +104,10 @@ PYTHON3() {
   cd /home/roboshop/"${COMPONENT}" && pip3 install -r requirements.txt &>>"$LOG"
   VALIDATE $?
 
-  PRINT "Update "${COMPONENT}" user and group id in config file"
+  PRINT "Update ${COMPONENT} user and group id in config file"
   UserID=$(id -u roboshop)
   GroupID=$(id -g roboshop)
-  sed -i -e "/uid/ c ${UserID}" -e "/gid/ c ${GroupID}" payment.ini &>>"$LOG"
+  sed -i -e "/uid/ c uid = ${UserID}" -e "/gid/ c gid = ${GroupID}" payment.ini &>>"$LOG"
   VALIDATE $?
 
   FIX_PERMISSIONS
