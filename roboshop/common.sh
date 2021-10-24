@@ -86,7 +86,7 @@ MAVEN() {
   DOWNLOAD_APP_CODE
 
   PRINT "Clean Maven Package"
-  cd /home/roboshop/"${COMPONENT}" &>>"$LOG" && mvn clean package --unsafe-perm &>>"$LOG" && mv target/shipping-1.0.jar shipping.jar &>>"$LOG"
+  cd /home/roboshop/"${COMPONENT}" &>>"$LOG" && mvn clean package &>>"$LOG" && mv target/shipping-1.0.jar shipping.jar &>>"$LOG"
   VALIDATE $?
 
   FIX_PERMISSIONS
