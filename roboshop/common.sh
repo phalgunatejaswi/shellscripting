@@ -40,7 +40,6 @@ DOWNLOAD_APP_CODE() {
   PRINT "Extract Application Code"
   cd /home/roboshop &>>"$LOG" && unzip -o /tmp/"${COMPONENT}".zip &>>"$LOG" && rm -rf "${COMPONENT}" &>>"$LOG" && mv "${COMPONENT}"-main "${COMPONENT}" &>>"$LOG"
   VALIDATE $?
-
 }
 
 FIX_PERMISSIONS() {
@@ -103,7 +102,7 @@ PYTHON3() {
   cd /home/roboshop/"${COMPONENT}" && pip3 install -r requirements.txt &>>"$LOG"
   VALIDATE $?
 
-  PRINT "Update ${COMPONENT} user and group id in config file"
+  PRINT "Update roboshop user and group id in config file"
   UserID=$(id -u roboshop)
   GroupID=$(id -g roboshop)
   sed -i -e "/uid/ c uid = ${UserID}" -e "/gid/ c gid = ${GroupID}" payment.ini &>>"$LOG"
